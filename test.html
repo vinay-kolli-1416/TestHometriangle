@@ -102,45 +102,44 @@
         datetimeInput.setAttribute("max", maxDate);
 
         document.getElementById("bookingForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+            event.preventDefault();
 
-  var name = document.getElementById("name").value;
-  var contact = document.getElementById("contact").value;
-  var address = document.getElementById("address").value;
-  var product = document.getElementById("product").value;
-  var datetime = document.getElementById("datetime").value;
+            var name = document.getElementById("name").value;
+            var contact = document.getElementById("contact").value;
+            var address = document.getElementById("address").value;
+            var product = document.getElementById("product").value;
+            var datetime = document.getElementById("datetime").value;
 
-  var response = await fetch("https://api.ipify.org?format=json");
-  var data = await response.json();
-  var ipAddress = data.ip;
+            var response = await fetch("https://api.ipify.org?format=json");
+            var data = await response.json();
+            var ipAddress = data.ip;
 
-  var geocodeResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
-  var geocodeData = await geocodeResponse.json();
-  var city = geocodeData.city;
+            var geocodeResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+            var geocodeData = await geocodeResponse.json();
+            var city = geocodeData.city;
 
-  var formData = {
-    name: name,
-    contact: contact,
-    address: address,
-    product: product,
-    datetime: datetime,
-    ipAddress: ipAddress,
-    city: city
-  };
+            var formData = {
+                name: name,
+                contact: contact,
+                address: address,
+                product: product,
+                datetime: datetime,
+                ipAddress: ipAddress,
+                city: city
+            };
 
-  fetch("https://script.google.com/macros/s/AKfycbw1_BkqDsQTdmfNJNkNkiQ3ZQGqpp00OKQKQK39bhulpglM4orIvBWSHrs4HumCtvBM/exec", {
-    method: "POST",
-    body: JSON.stringify(formData)
-  })
-    .then(function() {
-      document.getElementById("bookingForm").style.display = "none";
-      document.getElementById("confirmation").style.display = "block";
-    })
-    .catch(function(error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
-    });
-});
+            fetch("https://script.google.com/macros/s/AKfycbw1_BkqDsQTdmfNJNkNkiQ3ZQGqpp00OKQKQK39bhulpglM4orIvBWSHrs4HumCtvBM/exec", {
+                method: "POST",
+                body: JSON.stringify(formData)
+            })
+                .then(function() {
+                    document.getElementById("bookingForm").style.display = "none";
+                    document.getElementById("confirmation").style.display = "block";
+                })
+                .catch(function(error) {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again later.");
+                });
         });
     </script>
 </body>
